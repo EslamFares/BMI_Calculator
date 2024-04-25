@@ -1,4 +1,5 @@
 import 'package:bmi/core/utils/app_colors.dart';
+import 'package:bmi/core/widgets/small_icon_button.dart';
 import 'package:bmi/features/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ class HomeView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('BMI Calulator'),
           backgroundColor: AppColors.blue,
+          actions: [SmallIconButton(icon: Icons.logout, onPressed: () {})],
         ),
         body: const HomeViewBody(),
       ),

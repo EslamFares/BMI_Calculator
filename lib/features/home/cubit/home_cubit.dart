@@ -1,5 +1,5 @@
+import 'package:bmi/features/bmi_scores/model/bmi_score_model.dart';
 import 'package:bmi/features/home/cubit/home_state.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,31 +28,17 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       CollectionReference bmiCollection =
           FirebaseFirestore.instance.collection('bmi');
-      await bmiCollection.add({
-        'height': height.text,
-        'wight': wight.text,
-        'age': age.text,
-        'bmi': bmiResult.toStringAsFixed(2),
-        'time': DateTime.now().toString(),
-        // 'userCredential': FirebaseAuth.instance.currentUser!.uid
-      });
+      await bmiCollection.add(BmiScresModel(
+              height: height.text,
+              wight: wight.text,
+              age: age.text,
+              bmi: bmiResult.toString(),
+              time: DateTime.now().toString())
+          .toMap());
       emit(BmiSaveSucess());
     } on Exception catch (e) {
       debugPrint('error in savvvvvvvvvvvve: $e');
       emit(BmiSaveFailure(e.toString()));
-    }
-  }
-
-  getBmiSavedData() {
-    emit(GetBmiSavedDataLoading());
-    try {
-      final Stream<QuerySnapshot> bmiStream =
-          FirebaseFirestore.instance.collection('bmi').snapshots();
-
-      emit(GetBmiSavedDataSucess());
-    } on Exception catch (e) {
-      debugPrint('error in geeeeeeeeet: $e');
-      emit(GetBmiSavedDataFailure(e.toString()));
     }
   }
 }

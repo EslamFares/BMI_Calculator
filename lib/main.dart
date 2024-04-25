@@ -1,11 +1,8 @@
 import 'package:bmi/features/home/presention/views/home_view.dart';
-import 'package:bmi/features/login/cubit/login_cubit.dart';
-import 'package:bmi/features/login/prsentation/views/login_view.dart';
 import 'package:bmi/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'core/functions/mybloc_observer.dart';
 
 void main() async {
