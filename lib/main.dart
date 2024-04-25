@@ -1,3 +1,4 @@
+import 'package:bmi/features/home/presention/views/home_view.dart';
 import 'package:bmi/features/login/cubit/login_cubit.dart';
 import 'package:bmi/features/login/prsentation/views/login_view.dart';
 import 'package:bmi/firebase_options.dart';
@@ -23,15 +24,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BMI Calculator',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true),
-      home: BlocProvider(
-        create: (context) => LoginCubit(),
-        child: const LoginView(),
-      ),
-    );
+        title: 'BMI Calculator',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            useMaterial3: true),
+        home: const HomeView()
+        // BlocProvider(
+        //   create: (context) => LoginCubit(),
+        //   child: const LoginView(),
+        // ),
+        );
   }
 }

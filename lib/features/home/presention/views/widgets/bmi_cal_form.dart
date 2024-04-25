@@ -1,3 +1,4 @@
+import 'package:bmi/core/utils/app_text_styles.dart';
 import 'package:bmi/core/utils/spacing_extensions.dart';
 import 'package:bmi/core/widgets/custom_btn.dart';
 import 'package:bmi/core/widgets/global_text_form.dart';
@@ -5,6 +6,7 @@ import 'package:bmi/features/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/app_colors.dart';
 import '../../../cubit/home_state.dart';
 
 class BMICalForm extends StatelessWidget {
@@ -43,11 +45,18 @@ class BMICalForm extends StatelessWidget {
               ),
               verticalSpace(20),
               CustomBtn(
-                onTap: () {
-                  cubit.bmiCal();
-                },
-                text: 'BMI Calculator',
-              ),
+                  onTap: () {
+                    cubit.calBMI();
+                  },
+                  cutmChild: state is BmiSaveLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          color: AppColors.white,
+                        ))
+                      : const Text(
+                          "BMI Calculator",
+                          style: AppTextStyles.font22BoldWhite,
+                        )),
               verticalSpace(20),
             ],
           ),
