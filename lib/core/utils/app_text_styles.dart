@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 abstract class AppTextStyles {
-  static const TextStyle font22Bold =
-      TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
+  static const TextStyle font22BoldWhite = TextStyle(
+      fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.white);
   //========= 16============
   static const TextStyle font16BlackW500 = TextStyle(
     fontSize: 16,
