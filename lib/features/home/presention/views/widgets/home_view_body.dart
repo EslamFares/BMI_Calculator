@@ -16,7 +16,6 @@ class HomeViewBody extends StatelessWidget {
           child: Column(
             children: [
               spaceVertical(20),
-              // const BMICalForm(),
               const BMICalSliders(),
               const BmiCalButton(),
               const BmiShape(),
