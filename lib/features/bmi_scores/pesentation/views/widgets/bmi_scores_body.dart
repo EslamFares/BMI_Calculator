@@ -28,7 +28,6 @@ class BmiScoresBody extends StatelessWidget {
                       );
               } else {
                 if (bmiSnapshot.hasData) {
-                  debugPrint('bmiSnapshot: ${bmiSnapshot.data?.length}');
                   final bmiDocs = bmiSnapshot.data!;
                   return ScoresListViewBody(bmiDocs: bmiDocs);
                 } else {

@@ -95,7 +95,7 @@
 //               // reverse: true,
 //               itemBuilder: (ctx, i) {
 //                 Map bmiData = bmiDocs[i].data() as Map;
-//                 debugPrint('bmiData: $bmiData');
+//                 
 
 //                 return Container(
 //                     margin: const EdgeInsets.only(bottom: 5),

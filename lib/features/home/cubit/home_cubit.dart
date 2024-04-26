@@ -1,6 +1,5 @@
 import 'package:bmi/features/bmi_scores/model/bmi_score_model.dart';
 import 'package:bmi/features/home/cubit/home_state.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -50,7 +49,6 @@ class HomeCubit extends Cubit<HomeState> {
           .toMap());
       emit(BmiSaveSucess());
     } on Exception catch (e) {
-      debugPrint('error in savvvvvvvvvvvve: $e');
       emit(BmiSaveFailure(e.toString()));
     }
   }

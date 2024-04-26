@@ -88,9 +88,7 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
       Navigator.pop(context);
 
       emit(BmiUpdateState());
-    } else {
-      debugPrint('no new data');
-    }
+    } else {}
   }
 
 //------------------------------
