@@ -11,12 +11,12 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
 
   ///homeCubit
-  getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
+  getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
   //=====bmi scores===========
   //bmiScoresrepo
   getIt.registerLazySingleton<BmiScoresRepo>(() => BmiScoresRepo());
 
-  ///homeCubit
+  ///bmiScoresCubit
   getIt.registerFactory<BmiScoresCubit>(
       () => BmiScoresCubit(getIt<BmiScoresRepo>()));
 }
