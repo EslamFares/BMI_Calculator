@@ -14,13 +14,13 @@ class LoginViewBody extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        horizontalSpace(context.width),
+        spaceHorizontal(context.width),
         SizedBox(
             width: context.width * .8,
             height: 250,
             child: Image.asset(AppAssets.icon)),
         const Text('BMI Calculator', style: AppTextStyles.font25BuleDarkW500),
-        verticalSpace(100),
+        spaceVertical(100),
         const SignInButton()
       ],
     );

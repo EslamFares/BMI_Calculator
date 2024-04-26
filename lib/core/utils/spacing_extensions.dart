@@ -6,5 +6,6 @@ extension Size on BuildContext {
 }
 
 //==================
-SizedBox verticalSpace(double height) => SizedBox(height: height);
-SizedBox horizontalSpace(double width) => SizedBox(width: width);
+SizedBox spaceVertical(double height) => SizedBox(height: height);
+SizedBox spaceHorizontal(double width) => SizedBox(width: width);
+Widget spaceExpanded() => const Expanded(child: SizedBox());

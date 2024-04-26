@@ -9,6 +9,7 @@ import 'package:bmi/features/login/cubit/login_cubit.dart';
 import 'package:bmi/features/login/cubit/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignInButton extends StatelessWidget {
   const SignInButton({
@@ -36,8 +37,14 @@ class SignInButton extends StatelessWidget {
                   child: CircularProgressIndicator(
                   color: AppColors.white,
                 ))
-              : const Text("Sign In (anonymous)",
-                  style: AppTextStyles.font22BoldWhite),
+              : const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(FontAwesomeIcons.eyeSlash, color: AppColors.white),
+                    Text("Sign In (anonymous)",
+                        style: AppTextStyles.font22BoldWhite),
+                  ],
+                ),
         );
       },
     );

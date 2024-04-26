@@ -18,7 +18,7 @@ class EditScoreViewHorizental extends StatelessWidget {
         child: Row(
           children: [
             const Expanded(flex: 1, child: EditScoreForm()),
-            horizontalSpace(20),
+            spaceHorizontal(20),
             const Expanded(flex: 1, child: EditScoreButton()),
           ],
         ),

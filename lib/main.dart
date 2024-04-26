@@ -1,12 +1,14 @@
-import 'package:bmi/features/home/presention/views/home_view.dart';
+import 'package:bmi/features/splash/view/splash_view.dart';
 import 'package:bmi/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'core/functions/mybloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -26,6 +28,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             useMaterial3: true),
-        home: const HomeView());
+        home: const SplashView());
   }
 }

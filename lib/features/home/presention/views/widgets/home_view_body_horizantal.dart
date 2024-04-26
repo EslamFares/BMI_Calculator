@@ -16,7 +16,7 @@ class HomeViewBodyHorizantal extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              verticalSpace(20),
+              spaceVertical(20),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,7 +37,7 @@ class HomeViewBodyHorizantal extends StatelessWidget {
               SizedBox(
                   width: context.width * .7,
                   child: const ShowBmiScoresbutton()),
-              verticalSpace(30),
+              spaceVertical(30),
             ],
           ),
         ));

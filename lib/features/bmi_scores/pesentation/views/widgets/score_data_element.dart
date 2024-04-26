@@ -20,7 +20,7 @@ class ScoreDataElement extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: AppColors.blueDark, size: 20),
-        horizontalSpace(8),
+        spaceHorizontal(8),
         Text(
           text,
           textAlign: TextAlign.center,
