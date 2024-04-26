@@ -1,8 +1,10 @@
+import 'package:bmi/core/functions/check_is_tablet.dart';
 import 'package:bmi/core/utils/app_colors.dart';
 import 'package:bmi/core/utils/app_text_styles.dart';
+import 'package:bmi/core/utils/spacing_extensions.dart';
 import 'package:bmi/features/bmi_scores/pesentation/views/widgets/del_score_button.dart';
 import 'package:bmi/features/bmi_scores/pesentation/views/widgets/edit_score_item_button.dart';
-import 'package:bmi/features/bmi_scores/pesentation/views/widgets/score_data_element.dart';
+import 'package:bmi/features/bmi_scores/pesentation/views/widgets/score_item_body_childern.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../model/bmi_score_model.dart';
@@ -15,6 +17,7 @@ class ScoresItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("width:::::::::${context.width}");
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
@@ -22,7 +25,7 @@ class ScoresItem extends StatelessWidget {
       ),
       child: Container(
           margin: const EdgeInsets.only(bottom: 5),
-          height: 135,
+          height: context.width > 340 || isTablet(context) ? 135 : 160,
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -39,14 +42,19 @@ class ScoresItem extends StatelessWidget {
                         FontAwesomeIcons.calculator,
                         color: AppColors.blue,
                       ),
-                      const Text(
+                      Text(
                         'BMI : ',
-                        style: AppTextStyles.font22BuleW900,
+                        style: AppTextStyles.font22BuleW900.copyWith(
+                            fontSize: context.width > 340 || isTablet(context)
+                                ? 22
+                                : 16),
                       ),
                       Text(
                         " ${model.bmi}  kg/m2",
-                        style:
-                            AppTextStyles.font22BuleW900.copyWith(fontSize: 18),
+                        style: AppTextStyles.font22BuleW900.copyWith(
+                            fontSize: context.width > 340 || isTablet(context)
+                                ? 18
+                                : 14),
                       ),
                     ],
                   ),
@@ -58,34 +66,15 @@ class ScoresItem extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ScoreDataElement(
-                          icon: FontAwesomeIcons.textHeight,
-                          text: 'Height : ${model.height}cm '),
-                      ScoreDataElement(
-                          icon: FontAwesomeIcons.userAstronaut,
-                          text: 'age : ${model.age} years'),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ScoreDataElement(
-                          icon: FontAwesomeIcons.weightScale,
-                          text: "weight: ${model.wight} kg"),
-                      ScoreDataElement(
-                          icon: FontAwesomeIcons.calendarPlus,
-                          textStyle: AppTextStyles.font12GrayW400,
-                          text: model.time),
-                    ],
-                  ),
-                ],
-              ),
+              context.width > 340 || isTablet(context)
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: scoreItemBodyChildern(model),
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: scoreItemBodyChildern(model),
+                    )
             ],
           )),
     );

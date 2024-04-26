@@ -23,17 +23,21 @@ class HomeViewBodyHorizantal extends StatelessWidget {
                   Column(
                     children: [
                       SizedBox(
-                          width: context.width * .35,
-                          height: 220,
+                          width: context.width < 600
+                              ? context.width * .3
+                              : context.width * .35,
+                          height: context.width < 600 ? 120 : 220,
                           child: const BmiShape()),
                       SizedBox(
                           width: context.width * .3,
                           child: const BmiCalButton()),
                     ],
                   ),
+                  context.width < 600 ? spaceHorizontal(10) : const SizedBox(),
                   const Expanded(child: BMICalSliders()),
                 ],
               ),
+              context.width < 600 ? spaceVertical(20) : const SizedBox(),
               SizedBox(
                   width: context.width * .7,
                   child: const ShowBmiScoresbutton()),

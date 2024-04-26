@@ -1,3 +1,4 @@
+import 'package:bmi/core/functions/check_is_tablet.dart';
 import 'package:bmi/core/utils/app_text_styles.dart';
 import 'package:bmi/core/utils/spacing_extensions.dart';
 import 'package:bmi/features/home/cubit/home_cubit.dart';
@@ -23,7 +24,7 @@ class BMICalSliders extends StatelessWidget {
                 children: [
                   Card(
                     child: SizedBox(
-                      height: 125,
+                      height: isTablet(context) ? 250 : 125,
                       width: context.width - 100,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -48,7 +49,7 @@ class BMICalSliders extends StatelessWidget {
                   ),
                   Card(
                     child: SizedBox(
-                      height: 125,
+                      height: isTablet(context) ? 250 : 125,
                       width: context.width - 100,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -74,7 +75,7 @@ class BMICalSliders extends StatelessWidget {
             ),
             Card(
               child: SizedBox(
-                height: 260,
+                height: isTablet(context) ? 500 : 260,
                 width: 110,
                 child: Column(
                   children: [

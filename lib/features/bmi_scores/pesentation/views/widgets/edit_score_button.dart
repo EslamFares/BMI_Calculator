@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:bmi/core/functions/show_snack.dart';
 import 'package:bmi/core/utils/app_colors.dart';
 import 'package:bmi/core/utils/app_text_styles.dart';
+import 'package:bmi/core/utils/spacing_extensions.dart';
 import 'package:bmi/core/widgets/custom_btn.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_cubit.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_state.dart';
@@ -34,9 +35,10 @@ class EditScoreButton extends StatelessWidget {
                     child: CircularProgressIndicator(
                     color: AppColors.white,
                   ))
-                : const Text(
+                : Text(
                     "Update",
-                    style: AppTextStyles.font22BoldWhite,
+                    style: AppTextStyles.font22BoldWhite
+                        .copyWith(fontSize: context.width < 300 ? 22 : 14),
                   ),
             onTap: () => cubit.updateScore(context),
             color: !cubit.haveUpdate ? Colors.grey : Colors.red,

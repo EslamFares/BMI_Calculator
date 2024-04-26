@@ -1,3 +1,4 @@
+import 'package:bmi/core/functions/check_is_tablet.dart';
 import 'package:bmi/core/utils/spacing_extensions.dart';
 import 'package:bmi/features/home/cubit/home_cubit.dart';
 import 'package:bmi/features/home/cubit/home_state.dart';
@@ -16,7 +17,7 @@ class BmiShape extends StatelessWidget {
       builder: (context, state) {
         HomeCubit cubit = HomeCubit.get(context);
         return SizedBox(
-            height: 250,
+            height: isTablet(context) ? 400 : 250,
             width: context.width * .8,
             child: SfRadialGauge(axes: <RadialAxis>[
               RadialAxis(minimum: 0, maximum: 40, ranges: <GaugeRange>[

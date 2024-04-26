@@ -3,6 +3,7 @@ import 'package:bmi/core/functions/show_snack.dart';
 import 'package:bmi/core/utils/app_colors.dart';
 import 'package:bmi/core/utils/app_text_styles.dart';
 import 'package:bmi/core/utils/navigate_extensions.dart';
+import 'package:bmi/core/utils/spacing_extensions.dart';
 import 'package:bmi/core/widgets/custom_btn.dart';
 import 'package:bmi/features/home/presention/views/home_view.dart';
 import 'package:bmi/features/login/cubit/login_cubit.dart';
@@ -30,22 +31,36 @@ class SignInButton extends StatelessWidget {
       },
       builder: (context, state) {
         LoginCubit cubit = LoginCubit.get(context);
-        return CustomBtn(
-          onTap: () => cubit.signIn(),
-          cutmChild: state is LoginLoading
-              ? const Center(
-                  child: CircularProgressIndicator(
-                  color: AppColors.white,
-                ))
-              : const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Icon(FontAwesomeIcons.eyeSlash, color: AppColors.white),
-                    Text("Sign In (anonymous)",
-                        style: AppTextStyles.font22BoldWhite),
-                  ],
-                ),
-        );
+        return OrientationBuilder(builder: (context, orientation) {
+          debugPrint(">>>>>>>>>>${context.width}");
+          return CustomBtn(
+            onTap: () => cubit.signIn(),
+            cutmChild: state is LoginLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                    color: AppColors.white,
+                  ))
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(FontAwesomeIcons.eyeSlash,
+                          size: context.width < 600 &&
+                                  orientation == Orientation.landscape
+                              ? 15
+                              : 25,
+                          color: AppColors.white),
+                      Flexible(
+                        child: Text("Sign In (anonymous)",
+                            style: AppTextStyles.font22BoldWhite.copyWith(
+                                fontSize: context.width < 600 &&
+                                        orientation == Orientation.landscape
+                                    ? 12
+                                    : null)),
+                      ),
+                    ],
+                  ),
+          );
+        });
       },
     );
   }

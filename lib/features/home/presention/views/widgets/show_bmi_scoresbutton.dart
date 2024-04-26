@@ -11,13 +11,16 @@ class ShowBmiScoresbutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SwipeButton(
-      text: "Show BMI Scores",
-      backgroundColor: AppColors.blueDark,
-      swipeButtonColor: Colors.amber,
-      height: 56,
-      swipePercentageNeeded: .5,
-      onSwipeCallback: () => context.push(const BmiScoresView()),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: SwipeButton(
+        text: "Show BMI Scores",
+        backgroundColor: AppColors.blueDark,
+        swipeButtonColor: Colors.amber,
+        height: 56,
+        swipePercentageNeeded: .5,
+        onSwipeCallback: () => context.push(const BmiScoresView()),
+      ),
     );
   }
 }
