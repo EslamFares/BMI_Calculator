@@ -1,4 +1,7 @@
+import 'package:bmi/core/utils/navigate_extensions.dart';
 import 'package:bmi/core/utils/spacing_extensions.dart';
+import 'package:bmi/core/widgets/custom_btn.dart';
+import 'package:bmi/features/bmi_scores/pesentation/views/bmi_scores_view.dart';
 import 'package:bmi/features/home/presention/views/widgets/bmi_cal_button.dart';
 import 'package:bmi/features/home/presention/views/widgets/bmi_cal_sliders.dart';
 import 'package:bmi/features/home/presention/views/widgets/bmi_shape.dart';

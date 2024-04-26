@@ -90,11 +90,4 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
         ((double.parse(heightEdit.text) / 100) *
             (double.parse(heightEdit.text) / 100));
   }
-
-//------------------------------
-  @override
-  Future<void> close() async {
-    scrollController.dispose();
-    super.close();
-  }
 }

@@ -17,6 +17,6 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<BmiScoresRepo>(() => BmiScoresRepo());
 
   ///homeCubit
-  getIt.registerLazySingleton<BmiScoresCubit>(
+  getIt.registerFactory<BmiScoresCubit>(
       () => BmiScoresCubit(getIt<BmiScoresRepo>()));
 }
