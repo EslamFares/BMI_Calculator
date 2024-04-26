@@ -1,3 +1,4 @@
+import 'package:bmi/core/dependency_injection/get_it_stetup.dart';
 import 'package:bmi/features/home/cubit/home_cubit.dart';
 import 'package:bmi/features/home/presention/views/widgets/home_app_bar.dart';
 import 'package:bmi/features/home/presention/views/widgets/home_view_body_horizantal.dart';
@@ -11,7 +12,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(),
+      create: (context) => getIt<HomeCubit>(),
       child: Scaffold(
         appBar: const HomeAppBar(),
         body: OrientationBuilder(builder: (context, orientation) {

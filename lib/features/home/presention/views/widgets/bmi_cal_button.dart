@@ -1,3 +1,5 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:bmi/core/functions/show_snack.dart';
 import 'package:bmi/core/utils/app_colors.dart';
 import 'package:bmi/core/utils/app_text_styles.dart';
 import 'package:bmi/core/widgets/custom_btn.dart';
@@ -13,7 +15,13 @@ class BmiCalButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is BmiSaveFailure) {
+          showSnack(context,
+              contentType: ContentType.failure, message: state.error);
+        }
+      },
       builder: (context, state) {
         HomeCubit cubit = HomeCubit.get(context);
         return Padding(

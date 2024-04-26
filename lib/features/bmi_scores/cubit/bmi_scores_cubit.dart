@@ -1,16 +1,16 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:bmi/core/functions/get_data_pagenation.dart';
-import 'package:bmi/core/functions/show_snack.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_state.dart';
 import 'package:bmi/features/bmi_scores/model/bmi_score_model.dart';
+import 'package:bmi/features/bmi_scores/repo/bmi_scores_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BmiScoresCubit extends Cubit<BmiScoresState> {
-  BmiScoresCubit() : super(BmiScoresInitial());
+  final BmiScoresRepo bmiScoresRepo;
+  BmiScoresCubit(this.bmiScoresRepo) : super(BmiScoresInitial());
   static BmiScoresCubit get(context) => BlocProvider.of(context);
-  //==================================
+  //#=====================get PAgenation===================================
   final ScrollController scrollController = ScrollController();
   final GetDataPagenation bmiPagenation = GetDataPagenation(
       collectionName: 'bmi', dataLimit: 10, feildSortedBy: 'time');
@@ -30,15 +30,15 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
     return bmiPagenation.bmiController.stream;
   }
 
-  //=====================del==============
-  Future<void> delScore(id, context) async {
-    final collection = FirebaseFirestore.instance.collection('bmi');
-    await collection.doc(id).delete();
-    showSnack(context,
-        contentType: ContentType.failure, message: 'deleted successfully');
+  //#=====================delete============================================
+  Future<void> delScore(id) async {
+    emit(DeleteBmiLaoding());
+    final res = await bmiScoresRepo.deleteBmiScore(id);
+    res.fold((l) => emit(DeleteBmiFailure(l.message)),
+        (r) => emit(DeleteBmiSucces()));
   }
 
-  //==============update================
+  //#==============update======================================================
   TextEditingController heightEdit = TextEditingController();
   TextEditingController wightEdit = TextEditingController();
   TextEditingController ageEdit = TextEditingController();
@@ -71,24 +71,24 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
 
   Future<void> updateScore(context) async {
     if (haveUpdate && formEditKey.currentState!.validate()) {
-      final collection = FirebaseFirestore.instance.collection('bmi');
-      String newBmi = (double.parse(wightEdit.text) /
-              ((double.parse(heightEdit.text) / 100) *
-                  (double.parse(heightEdit.text) / 100)))
-          .toString();
-      await collection.doc(bmiScoreID).update(BmiScresModel(
+      emit(BmiUpdateLoading());
+      final res = await bmiScoresRepo.updateBmiScore(
+          bmiScoreID,
+          BmiScresModel(
               height: heightEdit.text,
               wight: wightEdit.text,
               age: ageEdit.text,
-              bmi: newBmi,
-              time: currentmodel.time)
-          .toMap());
-      showSnack(context,
-          contentType: ContentType.success, message: 'updated successfully');
-      Navigator.pop(context);
+              bmi: calBmiUpdated().toString(),
+              time: currentmodel.time));
+      res.fold((l) => emit(BmiUpdateFailure(l.message)),
+          (r) => emit(BmiUpdateSucces()));
+    }
+  }
 
-      emit(BmiUpdateState());
-    } else {}
+  double calBmiUpdated() {
+    return double.parse(wightEdit.text) /
+        ((double.parse(heightEdit.text) / 100) *
+            (double.parse(heightEdit.text) / 100));
   }
 
 //------------------------------

@@ -30,8 +30,8 @@ class BMICalSliders extends StatelessWidget {
                         children: [
                           SizedBox(
                             child: SfSlider(
-                              min: 5,
-                              max: 255,
+                              min: 30,
+                              max: 280,
                               value: cubit.wightValue.toDouble(),
                               interval: 50,
                               showLabels: true,
@@ -54,11 +54,10 @@ class BMICalSliders extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           SfSlider(
-                            min: 1,
-                            max: 121,
+                            min: 5,
+                            max: 125,
                             value: cubit.ageValue.toDouble(),
                             interval: 20,
-                            // showTicks: true,
                             showLabels: true,
                             enableTooltip: true,
                             minorTicksPerInterval: 1,
@@ -81,7 +80,7 @@ class BMICalSliders extends StatelessWidget {
                   children: [
                     Expanded(
                       child: SfSlider.vertical(
-                        min: 20,
+                        min: 75,
                         max: 225,
                         value: cubit.heightValue.toDouble(),
                         interval: 20,

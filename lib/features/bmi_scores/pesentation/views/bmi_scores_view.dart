@@ -1,3 +1,4 @@
+import 'package:bmi/core/dependency_injection/get_it_stetup.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,7 @@ class BmiScoresView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BmiScoresCubit()..init(),
+      create: (context) => getIt<BmiScoresCubit>()..init(),
       child: Scaffold(
           appBar: AppBar(
             title: const Text('BMI Scores'),

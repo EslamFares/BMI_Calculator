@@ -1,10 +1,12 @@
 import 'package:bmi/features/bmi_scores/model/bmi_score_model.dart';
 import 'package:bmi/features/home/cubit/home_state.dart';
+import 'package:bmi/features/home/repo/home_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
+  final HomeRepo homeRepo;
+  HomeCubit(this.homeRepo) : super(HomeInitial());
+
   static HomeCubit get(context) => BlocProvider.of(context);
   //======================
   String bmiResult = "24.7";
@@ -37,19 +39,27 @@ class HomeCubit extends Cubit<HomeState> {
 
   saveBMIinFireStore() async {
     emit(BmiSaveLoading());
-    try {
-      CollectionReference bmiCollection =
-          FirebaseFirestore.instance.collection('bmi');
-      await bmiCollection.add(BmiScresModel(
-              height: heightValue.toString(),
-              wight: wightValue.toString(),
-              age: ageValue.toString(),
-              bmi: bmiResult,
-              time: DateTime.now().toString())
-          .toMap());
-      emit(BmiSaveSucess());
-    } on Exception catch (e) {
-      emit(BmiSaveFailure(e.toString()));
-    }
+    final res = await homeRepo.addBmiScore(BmiScresModel(
+        height: heightValue.toString(),
+        wight: wightValue.toString(),
+        age: ageValue.toString(),
+        bmi: bmiResult,
+        time: DateTime.now().toString()));
+    res.fold((l) => BmiSaveFailure(l.message), (r) => emit(BmiSaveSucess()));
+    // try {
+    //   CollectionReference bmiCollection =
+    //       FirebaseFirestore.instance.collection('bmi');
+    //   await bmiCollection.add(
+    // BmiScresModel(
+    //           height: heightValue.toString(),
+    //           wight: wightValue.toString(),
+    //           age: ageValue.toString(),
+    //           bmi: bmiResult,
+    //           time: DateTime.now().toString())
+    //       .toMap());
+    //   emit(BmiSaveSucess());
+    // } on Exception catch (e) {
+    //   emit(BmiSaveFailure("can't save data check connection /n $e"));
+    // }
   }
 }

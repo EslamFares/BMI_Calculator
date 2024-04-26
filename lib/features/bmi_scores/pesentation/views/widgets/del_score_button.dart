@@ -1,3 +1,5 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:bmi/core/functions/show_snack.dart';
 import 'package:bmi/core/widgets/ios_show_dialog.dart';
 import 'package:bmi/core/widgets/small_icon_button.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_cubit.dart';
@@ -15,7 +17,18 @@ class DelScoreButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BmiScoresCubit, BmiScoresState>(
+    return BlocConsumer<BmiScoresCubit, BmiScoresState>(
+      listener: (BuildContext context, BmiScoresState state) {
+        if (state is DeleteBmiSucces) {
+          showSnack(context,
+              contentType: ContentType.help, message: 'deleted successfully');
+        }
+
+        if (state is DeleteBmiFailure) {
+          showSnack(context,
+              contentType: ContentType.failure, message: state.message);
+        }
+      },
       builder: (context, state) {
         return SmallIconButton(
             icon: Icons.delete,
@@ -25,8 +38,7 @@ class DelScoreButton extends StatelessWidget {
                   context: context,
                   title: "Delete",
                   subTitle: "Delete?",
-                  onConfirm: () =>
-                      BmiScoresCubit.get(context).delScore(id, context));
+                  onConfirm: () => BmiScoresCubit.get(context).delScore(id));
             });
       },
     );
