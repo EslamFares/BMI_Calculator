@@ -8,20 +8,32 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
   static HomeCubit get(context) => BlocProvider.of(context);
   //======================
-  TextEditingController height = TextEditingController();
-  TextEditingController wight = TextEditingController();
-  TextEditingController age = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey();
-  String bmiResult = "20.1";
+  String bmiResult = "24.7";
+  // --------------------
+  int heightValue = 180;
+  changeHeight(double value) {
+    heightValue = value.toInt();
+    emit(ChangeHeightState());
+  }
+
+  int wightValue = 80;
+  changeWight(double value) {
+    wightValue = value.toInt();
+    emit(ChangeWightState());
+  }
+
+  int ageValue = 20;
+  changeAge(double value) {
+    ageValue = value.toInt();
+    emit(ChangeAgeState());
+  }
+
+//--------------------------------------------------------
   calBMI() async {
-    if (formKey.currentState!.validate()) {
-      bmiResult = (double.parse(wight.text) /
-              ((double.parse(height.text) / 100) *
-                  (double.parse(height.text) / 100)))
-          .toStringAsFixed(2);
-      emit(BmiCalState());
-      await saveBMIinFireStore();
-    }
+    bmiResult = (wightValue / ((heightValue / 100) * (heightValue / 100)))
+        .toStringAsFixed(2);
+    emit(BmiCalState());
+    await saveBMIinFireStore();
   }
 
   saveBMIinFireStore() async {
@@ -30,9 +42,9 @@ class HomeCubit extends Cubit<HomeState> {
       CollectionReference bmiCollection =
           FirebaseFirestore.instance.collection('bmi');
       await bmiCollection.add(BmiScresModel(
-              height: height.text,
-              wight: wight.text,
-              age: age.text,
+              height: heightValue.toString(),
+              wight: wightValue.toString(),
+              age: ageValue.toString(),
               bmi: bmiResult,
               time: DateTime.now().toString())
           .toMap());

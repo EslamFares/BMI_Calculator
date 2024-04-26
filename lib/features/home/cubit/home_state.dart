@@ -4,6 +4,12 @@ final class HomeInitial extends HomeState {}
 
 final class BmiCalState extends HomeState {}
 
+final class ChangeHeightState extends HomeState {}
+
+final class ChangeAgeState extends HomeState {}
+
+final class ChangeWightState extends HomeState {}
+
 final class BmiSaveLoading extends HomeState {}
 
 final class BmiSaveSucess extends HomeState {}
