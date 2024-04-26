@@ -1,3 +1,4 @@
+import 'package:bmi/core/utils/app_constants.dart';
 import 'package:bmi/features/login/cubit/login_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,7 @@ class LoginCubit extends Cubit<LoginState> {
       // ignore: unused_local_variable
       UserCredential userCredential =
           await FirebaseAuth.instance.signInAnonymously();
-      GetStorageHelper.writeData('isLogined', true);
+      GetStorageHelper.writeData(AppConsts.isLogined, true);
       emit(LoginSucess());
     } on FirebaseAuthException catch (e) {
       emit(LoginFailure(message: "wrong in login as anonymous $e"));

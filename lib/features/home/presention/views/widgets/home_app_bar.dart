@@ -1,4 +1,6 @@
+import 'package:bmi/core/cash/getstorage_helper.dart';
 import 'package:bmi/core/utils/app_colors.dart';
+import 'package:bmi/core/utils/app_constants.dart';
 import 'package:bmi/core/utils/app_text_styles.dart';
 import 'package:bmi/core/utils/navigate_extensions.dart';
 import 'package:bmi/core/widgets/ios_show_dialog.dart';
@@ -28,6 +30,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               title: 'Log Out',
               subTitle: "Are you sure?",
               onConfirm: () {
+                GetStorageHelper.writeData(AppConsts.isLogined, false);
                 context.pushAndRemoveUntil(const LoginView());
               },
             );

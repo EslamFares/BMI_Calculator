@@ -3,7 +3,7 @@ import 'package:bmi/core/utils/app_constants.dart';
 
 bool checkIsUserLoginBefore() {
   bool? isFirstTime = GetStorageHelper.readData(AppConsts.isLogined);
-  if (isFirstTime == null) {
+  if (isFirstTime == null || isFirstTime == false) {
     return true;
   } else {
     return false;
