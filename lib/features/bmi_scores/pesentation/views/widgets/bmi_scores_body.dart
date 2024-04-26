@@ -1,8 +1,15 @@
+import 'package:bmi/core/functions/show_snack.dart';
+import 'package:bmi/core/utils/navigate_extensions.dart';
 import 'package:bmi/core/utils/spacing_extensions.dart';
+import 'package:bmi/core/widgets/global_text_form.dart';
+import 'package:bmi/core/widgets/ios_show_dialog.dart';
 import 'package:bmi/core/widgets/small_icon_button.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_cubit.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_state.dart';
+import 'package:bmi/features/bmi_scores/pesentation/views/widgets/edit_scores_view.dart';
+import 'package:bmi/features/home/presention/views/widgets/bmi_cal_form.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,15 +62,18 @@ class BmiScoresBody extends StatelessWidget {
                                 SmallIconButton(
                                     icon: Icons.edit,
                                     onPressed: () {
-                                      cubit.updateScore(
-                                          bmiDocs[i].id,
-                                          BmiScresModel(
-                                                  height: "999",
-                                                  wight: "9999",
-                                                  age: "999",
-                                                  bmi: "999",
-                                                  time: "999")
-                                              .toMap());
+                                      iosShowDialog(
+                                          context: context,
+                                          title: "edit",
+                                          subTitle: "edit",
+                                          onConfirm: () =>
+                                              context.push(BlocProvider.value(
+                                                value: context
+                                                    .read<BmiScoresCubit>()
+                                                  ..fetchOldData(
+                                                      model, bmiDocs[i].id),
+                                                child: const EditScoresView(),
+                                              )));
                                     }),
                                 Text(model.height),
                                 Text(model.wight),
@@ -71,7 +81,12 @@ class BmiScoresBody extends StatelessWidget {
                                 SmallIconButton(
                                     icon: Icons.delete,
                                     onPressed: () {
-                                      cubit.delScore(bmiDocs[i].id);
+                                      iosShowDialog(
+                                          context: context,
+                                          title: "Delete",
+                                          subTitle: "Delete?",
+                                          onConfirm: () =>
+                                              cubit.delScore(bmiDocs[i].id));
                                     }),
                               ],
                             ));
