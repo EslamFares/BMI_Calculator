@@ -23,18 +23,28 @@ class BMICalForm extends StatelessWidget {
           key: cubit.formKey,
           child: Column(
             children: [
-              GlobalTextForm(
-                  textController: cubit.height,
-                  hintText: "180 cm ",
-                  labelText: 'Height',
-                  keyBordType: TextInputType.number,
-                  moreValidation: () => validValue(cubit.height, 20, 250)),
-              GlobalTextForm(
-                textController: cubit.wight,
-                hintText: "75 kg",
-                labelText: 'Wight',
-                keyBordType: TextInputType.number,
-                moreValidation: () => validValue(cubit.wight, 1, 500),
+              Row(
+                children: [
+                  Expanded(
+                    child: GlobalTextForm(
+                        textController: cubit.height,
+                        hintText: "180 cm ",
+                        labelText: 'Height',
+                        keyBordType: TextInputType.number,
+                        moreValidation: () =>
+                            validValue(cubit.height, 20, 250)),
+                  ),
+                  horizontalSpace(16),
+                  Expanded(
+                    child: GlobalTextForm(
+                      textController: cubit.wight,
+                      hintText: "75 kg",
+                      labelText: 'Wight',
+                      keyBordType: TextInputType.number,
+                      moreValidation: () => validValue(cubit.wight, 1, 500),
+                    ),
+                  ),
+                ],
               ),
               GlobalTextForm(
                 textController: cubit.age,
@@ -77,7 +87,7 @@ validValue(TextEditingController crtl, int startValue, int endValue) {
   } else {
     if (double.parse(crtl.text) < startValue ||
         double.parse(crtl.text) > endValue) {
-      return 'enter value from $startValue to $endValue';
+      return 'from $startValue to $endValue';
     }
   }
   return null;

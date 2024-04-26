@@ -31,8 +31,8 @@ class BmiScresModel {
       height: map['height'] as String,
       wight: map['wight'] as String,
       age: map['age'] as String,
-      bmi: map['bmi'] as String,
-      time: map['time'].toString().toString().split(".")[0],
+      bmi: map['bmi'].toString().substring(0, 5),
+      time: map['time'].toString().split(".")[0],
     );
   }
 

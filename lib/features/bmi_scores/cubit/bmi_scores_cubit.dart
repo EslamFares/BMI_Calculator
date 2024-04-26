@@ -1,4 +1,6 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:bmi/core/functions/get_data_pagenation.dart';
+import 'package:bmi/core/functions/show_snack.dart';
 import 'package:bmi/features/bmi_scores/cubit/bmi_scores_state.dart';
 import 'package:bmi/features/bmi_scores/model/bmi_score_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,9 +31,11 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
   }
 
   //=====================del==============
-  Future<void> delScore(id) async {
+  Future<void> delScore(id, context) async {
     final collection = FirebaseFirestore.instance.collection('bmi');
-    collection.doc(id).delete();
+    await collection.doc(id).delete();
+    showSnack(context,
+        contentType: ContentType.failure, message: 'deleted successfully');
   }
 
   //==============update================
@@ -49,6 +53,7 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
     heightEdit.text = model.height.toString();
     wightEdit.text = model.wight.toString();
     ageEdit.text = model.age.toString();
+    haveUpdate = false;
     emit(BmiScoresOldDataState());
   }
 
@@ -64,7 +69,7 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
     }
   }
 
-  Future<void> updateScore() async {
+  Future<void> updateScore(context) async {
     if (haveUpdate && formEditKey.currentState!.validate()) {
       final collection = FirebaseFirestore.instance.collection('bmi');
       String newBmi = (double.parse(wightEdit.text) /
@@ -78,6 +83,9 @@ class BmiScoresCubit extends Cubit<BmiScoresState> {
               bmi: newBmi,
               time: currentmodel.time)
           .toMap());
+      showSnack(context,
+          contentType: ContentType.success, message: 'updated successfully');
+      Navigator.pop(context);
 
       emit(BmiUpdateState());
     } else {

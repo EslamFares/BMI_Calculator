@@ -12,12 +12,13 @@ class HomeCubit extends Cubit<HomeState> {
   TextEditingController wight = TextEditingController();
   TextEditingController age = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
-  double bmiResult = 0;
+  String bmiResult = "20.1";
   calBMI() async {
     if (formKey.currentState!.validate()) {
-      bmiResult = double.parse(wight.text) /
-          ((double.parse(height.text) / 100) *
-              (double.parse(height.text) / 100));
+      bmiResult = (double.parse(wight.text) /
+              ((double.parse(height.text) / 100) *
+                  (double.parse(height.text) / 100)))
+          .toStringAsFixed(2);
       emit(BmiCalState());
       await saveBMIinFireStore();
     }
@@ -32,7 +33,7 @@ class HomeCubit extends Cubit<HomeState> {
               height: height.text,
               wight: wight.text,
               age: age.text,
-              bmi: bmiResult.toString(),
+              bmi: bmiResult,
               time: DateTime.now().toString())
           .toMap());
       emit(BmiSaveSucess());

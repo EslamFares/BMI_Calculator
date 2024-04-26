@@ -16,4 +16,9 @@ abstract class AppTextStyles {
     color: AppColors.blueDark,
     fontWeight: FontWeight.w500,
   );
+  static const TextStyle font25BuleDarkW500 = TextStyle(
+    fontSize: 25,
+    color: AppColors.blueDark,
+    fontWeight: FontWeight.w900,
+  );
 }

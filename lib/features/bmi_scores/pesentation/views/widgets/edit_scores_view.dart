@@ -52,8 +52,7 @@ class EditScoresView extends StatelessWidget {
                   ),
                   verticalSpace(20),
                   CustomBtn(
-                    onTap: () =>
-                        cubit.updateScore().then((value) => context.pop()),
+                    onTap: () => cubit.updateScore(context),
                     color: !cubit.haveUpdate ? Colors.grey : Colors.red,
                   ),
                   verticalSpace(20),
