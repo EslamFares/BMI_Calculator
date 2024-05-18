@@ -1,4 +1,10 @@
 # BMI Calculator
+
+<p align="center">
+  <img src="https://github.com/EslamFares/Readme/blob/master/apps%20covers/bmi%20Mockup%2010.png?raw=true" width="300px" style="border-radius: 14px 14px 14px 14px">
+  <img src="https://github.com/EslamFares/Readme/blob/master/apps%20covers/bmi%20Mockup%2011.png?raw=true" width="300px" style="border-radius: 14px 14px 14px 14px">
+</p>
+
 ## Download apk
 https://github.com/EslamFares/BMI_Calculator/blob/master/app/app-release.apk
 ## video for app
